@@ -143,7 +143,7 @@ class RobotRss(object):
             update.message.reply_text(message)
             return
 
-        entries = reversed(FeedHandler.parse_feed(url[0], args_count))
+        entries = FeedHandler.parse_feed(url[0], args_count)
         for entry in entries:
             message = "[" + url[1] + "] " + entry.description + \
                 "<br/> <br/>" + \
