@@ -148,14 +148,15 @@ class RobotRss(object):
             message = "[" + url[1] + "] " + entry.description + \
                 "<br/> <br/>" + \
                 "<a href='" + entry.link + "'>" + entry.title + "</a>"
-            print(message)
+            print(message, entry)
 
             try:
                 update.message.reply_text(message, parse_mode=ParseMode.HTML)
             except Unauthorized:
                 self.db.update_user(telegram_id=telegram_user.id, is_active=0)
-            except TelegramError:
+            except TelegramError as e:
                 # handle all other telegram related errors
+                print('TelegramError', e)
                 pass
 
     def remove(self, bot, update, args):
