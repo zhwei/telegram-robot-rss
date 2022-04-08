@@ -152,8 +152,9 @@ class RobotRss(object):
 
             try:
                 update.message.reply_text(message, parse_mode=ParseMode.HTML)
-            except Unauthorized:
+            except Unauthorized as e:
                 self.db.update_user(telegram_id=telegram_user.id, is_active=0)
+                print('Unauthorized', telegram_user, e)
             except TelegramError as e:
                 # handle all other telegram related errors
                 print('TelegramError', e)
